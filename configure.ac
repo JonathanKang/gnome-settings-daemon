@@ -298,6 +298,33 @@ PKG_CHECK_MODULES(COMMON,
 PKG_CHECK_MODULES(HELPER, gio-unix-2.0)
 
 dnl ==============================================
+dnl PackageKit section
+dnl ==============================================
+
+have_packagekit=false
+AC_ARG_ENABLE(packagekit,
+  AC_HELP_STRING([--disable-packagekit],
+                 [turn off PackageKit support]),
+       [case "${enableval}" in
+               yes) WANT_PACKAGEKIT=yes ;;
+               no)  WANT_PACKAGEKIT=no ;;
+               *) AC_MSG_ERROR(bad value ${enableval} for --disable-packagekit) ;;
+       esac],
+       [WANT_PACKAGEKIT=yes]) dnl Default value
+
+if test x$WANT_PACKAGEKIT = xyes ; then
+       PK_REQUIRED_VERSION=0.8.1
+       PKG_CHECK_MODULES(PACKAGEKIT, glib-2.0 packagekit-glib2 >= $PK_REQUIRED_VERSION upower-glib >= $UPOWER_REQUIRED_VERSION gudev-1.0 libnotify >= $LIBNOTIFY_REQUIRED_VERSION,
+             [have_packagekit=true
+              AC_DEFINE(HAVE_PACKAGEKIT, 1, [Define if PackageKit should be used])],
+             [have_packagekit=false])
+fi
+AM_CONDITIONAL(HAVE_PACKAGEKIT, test "x$have_packagekit" = "xtrue")
+
+AC_SUBST(PACKAGEKIT_CFLAGS)
+AC_SUBST(PACKAGEKIT_LIBS)
+
+dnl ==============================================
 dnl smartcard section
 dnl ==============================================
 have_smartcard_support=false
@@ -533,6 +560,7 @@ plugins/screensaver-proxy/Makefile
 plugins/sharing/Makefile
 plugins/smartcard/Makefile
 plugins/sound/Makefile
+plugins/updates/Makefile
 plugins/wacom/Makefile
 plugins/xrandr/Makefile
 plugins/xsettings/Makefile
@@ -545,6 +573,7 @@ data/org.gnome.settings-daemon.plugins.color.gschema.xml.in
 data/org.gnome.settings-daemon.plugins.media-keys.gschema.xml.in
 data/org.gnome.settings-daemon.peripherals.gschema.xml.in
 data/org.gnome.settings-daemon.plugins.housekeeping.gschema.xml.in
+data/org.gnome.settings-daemon.plugins.updates.gschema.xml.in
 data/org.gnome.settings-daemon.plugins.sharing.gschema.xml.in
 data/org.gnome.settings-daemon.plugins.xrandr.gschema.xml.in
 data/org.gnome.settings-daemon.peripherals.wacom.gschema.xml.in
@@ -577,6 +606,7 @@ echo "
 
         NetworkManager support:   ${enable_network_manager}
         Libnotify support:        ${have_libnotify}
+        PackageKit support:       ${have_packagekit}
         Smartcard support:        ${have_smartcard_support}
         Cups support:             ${enable_cups}
         Wacom support:            ${have_wacom}

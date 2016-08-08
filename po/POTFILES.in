@@ -8,6 +8,7 @@ data/org.gnome.settings-daemon.plugins.housekeeping.gschema.xml.in.in
 data/org.gnome.settings-daemon.plugins.media-keys.gschema.xml.in.in
 data/org.gnome.settings-daemon.plugins.power.gschema.xml.in.in
 data/org.gnome.settings-daemon.plugins.sharing.gschema.xml.in.in
+data/org.gnome.settings-daemon.plugins.updates.gschema.xml.in.in
 data/org.gnome.settings-daemon.plugins.xrandr.gschema.xml.in.in
 data/org.gnome.settings-daemon.plugins.xsettings.gschema.xml.in.in
 plugins/a11y-keyboard/gsd-a11y-keyboard-manager.c
@@ -29,6 +30,9 @@ plugins/print-notifications/gsd-printer.c
 plugins/print-notifications/gsd-print-notifications-manager.c
 plugins/smartcard/gsd-smartcard-manager.c
 plugins/smartcard/gsd-smartcard-service.c
+plugins/updates/gsd-updates-firmware.c
+plugins/updates/gsd-updates-manager.c
+plugins/updates/updates.gnome-settings-plugin.in
 plugins/wacom/gsd-wacom-button-editor.c
 plugins/wacom/gsd-wacom-device.c
 plugins/wacom/gsd-wacom-key-shortcut-button.c

@@ -15,6 +15,7 @@ gsettings_SCHEMAS =							\
 	org.gnome.settings-daemon.plugins.sharing.gschema.xml		\
 	org.gnome.settings-daemon.plugins.xsettings.gschema.xml		\
 	org.gnome.settings-daemon.plugins.housekeeping.gschema.xml	\
+	org.gnome.settings-daemon.plugins.updates.gschema.xml       \
 	org.gnome.settings-daemon.plugins.xrandr.gschema.xml		\
 	org.gnome.settings-daemon.peripherals.wacom.gschema.xml
 
